@@ -27,7 +27,7 @@ const cli = meow(
 	  --branch-prefix        Branch prefix to find combinable PRs based on
 	  --include-failed       Include PRs whose status checks have failed
 	  --combine-branch-name  Name of the branch to combine PRs into
-	  --ignore-label         PR's with this label will not be combined
+	  --ignore-labels         PR's with this labels will not be combined
 	                         Defaults to "nocombine"
 	  --base-branch          Base branch to branch from & PR into
 	                         Defaults to "main"
@@ -55,7 +55,7 @@ const cli = meow(
         type: "string",
         default: "combined-prs",
       },
-      ignoreLabel: {
+      ignoreLabels: {
         type: "string",
         default: "nocombine",
       },
@@ -104,7 +104,7 @@ const TARGET_STRING_RE = /^([\w-_]+)\/([\w-_]+)$/;
   const {
     includeFailed,
     branchPrefix,
-    ignoreLabel,
+    ignoreLabels,
     combineBranchName,
     baseBranch,
     skipPr,
@@ -173,7 +173,7 @@ const TARGET_STRING_RE = /^([\w-_]+)\/([\w-_]+)$/;
           mustBeGreen: !includeFailed,
           allowSkipped,
           branchPrefix,
-          ignoreLabel,
+          ignoreLabels,
           combineBranchName,
           baseBranch,
           openPR: !skipPr,

@@ -17,7 +17,7 @@ const main = async () => {
   const githubToken = core.getInput("githubToken", { required: true });
   const mustBeGreen = core.getBooleanInput("mustBeGreen", { required: true });
   const branchPrefix = core.getInput("branchPrefix", { required: true });
-  const ignoreLabel = core.getInput("ignoreLabel", { required: true });
+  const ignoreLabels = core.getInput("ignoreLabels", { required: true });
   const combineBranchName = core.getInput("combineBranchName", {
     required: true,
   });
