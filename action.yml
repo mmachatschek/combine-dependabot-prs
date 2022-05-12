@@ -20,6 +20,9 @@ inputs:
     description: "Exclude PRs with these labels (, comma separated)"
     required: true
     default: "nocombine"
+  includeLabels:
+    description: "Include PRs with these labels (, comma separated)"
+    required: false
   baseBranch:
     description: "Branch to PR into"
     required: true
@@ -36,7 +39,11 @@ inputs:
     description: "Whether to treat skipped checks as successful"
     default: false
     required: false
+  prTitle:
+    description: "Set title of created PR"
+    required: true
+    default: "Update combined dependencies"
 runs:
-  using: "node12"
+  using: "node16"
   pre: "action/pre.js"
   main: "action/main.js"

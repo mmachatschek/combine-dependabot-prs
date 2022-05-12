@@ -18,6 +18,8 @@ const main = async () => {
   const mustBeGreen = core.getBooleanInput("mustBeGreen", { required: true });
   const branchPrefix = core.getInput("branchPrefix", { required: true });
   const ignoreLabels = core.getInput("ignoreLabels", { required: true });
+  const includeLabels = core.getInput("includeLabels");
+  const prTitle = core.getInput("prTitle", { required: true });
   const combineBranchName = core.getInput("combineBranchName", {
     required: true,
   });
@@ -58,9 +60,11 @@ const main = async () => {
       allowSkipped,
       branchPrefix,
       ignoreLabels,
+      includeLabels,
       combineBranchName,
       baseBranch,
       openPR,
+      prTitle,
     }
   );
 };

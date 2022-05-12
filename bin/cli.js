@@ -27,12 +27,15 @@ const cli = meow(
 	  --branch-prefix        Branch prefix to find combinable PRs based on
 	  --include-failed       Include PRs whose status checks have failed
 	  --combine-branch-name  Name of the branch to combine PRs into
-	  --ignore-labels         PR's with this labels will not be combined
+	  --ignore-labels        PR's with these labels will not be combined
 	                         Defaults to "nocombine"
+    --include-labels       PR's with these labels will be combined
 	  --base-branch          Base branch to branch from & PR into
 	                         Defaults to "main"
-    --allow-skipped        Allow skipped checks to be considered succesful
+    --allow-skipped        Allow skipped checks to be considered successful
 	  --skip-pr              If present, will skip creating a new PR for the new branch
+	  --pr-title             The title of the PR
+	                         Defaults to "Update combined dependencies"
 
 	Examples
 	  $ combine-dependabot-prs mAAdhaTTah/memezer
@@ -59,6 +62,10 @@ const cli = meow(
         type: "string",
         default: "nocombine",
       },
+      includeLabels: {
+        type: "string",
+        default: "combine",
+      },
       baseBranch: {
         type: "string",
         default: "main",
@@ -70,6 +77,10 @@ const cli = meow(
       allowSkipped: {
         type: "boolean",
         default: false,
+      },
+      prTitle: {
+        type: "string",
+        default: "Update combined dependencies",
       },
     },
   }
@@ -105,10 +116,12 @@ const TARGET_STRING_RE = /^([\w-_]+)\/([\w-_]+)$/;
     includeFailed,
     branchPrefix,
     ignoreLabels,
+    includeLabels,
     combineBranchName,
     baseBranch,
     skipPr,
     allowSkipped,
+    prTitle,
   } = cli.flags;
   let { githubToken } = cli.flags;
 
@@ -174,9 +187,11 @@ const TARGET_STRING_RE = /^([\w-_]+)\/([\w-_]+)$/;
           allowSkipped,
           branchPrefix,
           ignoreLabels,
+          includeLabels,
           combineBranchName,
           baseBranch,
           openPR: !skipPr,
+          prTitle,
         }
       );
 

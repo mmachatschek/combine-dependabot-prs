@@ -47,9 +47,11 @@ jobs:
           mustBeGreen: true
           combineBranchName: "combined-prs"
           ignoreLabels: "nocombine"
+          includeLabels: "combine"
           baseBranch: "main"
           openPR: true
           allowSkipped: false
+          prTitle: "Update combined dependencies"
 ```
 
 These are the defaults, and any or all can be customized or omitted.
