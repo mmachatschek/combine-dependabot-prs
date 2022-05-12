@@ -23,7 +23,9 @@ const main = async () => {
   });
   const baseBranch = core.getInput("baseBranch", { required: true });
   const openPR = core.getBooleanInput("openPR", { required: true });
-  const allowSkipped = core.getBooleanInput("allowSkipped", { required: false });
+  const allowSkipped = core.getBooleanInput("allowSkipped", {
+    required: false,
+  });
   const github = getOctokit(githubToken);
 
   await execa("git", ["config", "user.name", "github-actions"]);
@@ -55,7 +57,7 @@ const main = async () => {
       mustBeGreen,
       allowSkipped,
       branchPrefix,
-      ignoreLabel,
+      ignoreLabels,
       combineBranchName,
       baseBranch,
       openPR,
